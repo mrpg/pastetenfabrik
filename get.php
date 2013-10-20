@@ -11,20 +11,21 @@ else {
 	include "pastes.php";
 	
 	$id = $_GET['id'];
+	$title = dec(base64_decode($p[$id][0]));
 }
 ?>
 <!doctype html>
 <html>
 <head>
-<title>Pastetenfabrik</title>
+<title>Pastetenfabrik at <?=$_SERVER["SERVER_NAME"].(!empty($title)?': '.$title:'') ?></title>
 </head>
 <body>
-<h1>Pastetenfabrik</h1>
+<h1>Pastetenfabrik at <?=$_SERVER["SERVER_NAME"] ?></h1>
 
 <hr />
 
 <p><i><?php echo date('r',$p[$id][1]); ?></i> by <?php echo (is_numeric($p[$id][2]))?'USER'.$p[$id][2]:md5($p[$id][2]).' (IP recorded)'; ?> &middot; <a href="<?php echo $id; ?>.txt">[raw]</a></p>
-<h2><?php echo $id.': '.dec(base64_decode($p[$id][0])); ?></h2>
+<h2><?php echo $id.': '.$title ?></h2>
 
 <pre>
 <?php
