@@ -16,10 +16,10 @@ else {
 <!doctype html>
 <html>
 <head>
-<title>MRPasteG</title>
+<title>Pastetenfabrik</title>
 </head>
 <body>
-<h1>MRPasteG</h1>
+<h1>Pastetenfabrik</h1>
 
 <hr />
 
@@ -35,7 +35,7 @@ echo dec(getp($id));
 <hr />
 <?php if (!empty($pgp)) echo '<p><a href="'.$pgp.'">PGP key</a></p>'; ?>
 <?php if (!empty($footer)) echo $footer; ?>
-<p><a href="https://github.com/mrpg/mrpasteg">MRPasteG is Free Software</a>.
+<p><a href="https://github.com/mrpg/mrpasteg">Pastetenfabrik is Free Software</a>.
 </p>
 </body>
 </html>

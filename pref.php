@@ -6,7 +6,7 @@ $pw[] = "user96232"; // First user... (id 1)
 $pw[] = "458565424"; // Second user... (id 2)
 
 // You can delete and add users as you like.
-// Or: Make your MRPasteG public:
+// Or: Make your Pastetenfabrik public:
 
 $public = false; // Set this to true to make your pastebin public.
 
