@@ -35,7 +35,8 @@ echo dec(getp($id));
 <hr />
 <?php if (!empty($pgp)) echo '<p><a href="'.$pgp.'">PGP key</a></p>'; ?>
 <?php if (!empty($footer)) echo $footer; ?>
-<p><a href="https://github.com/mrpg/mrpasteg">Pastetenfabrik is Free Software</a>.
+<p><a href="https://github.com/mrpg/pastetenfabrik">Pastetenfabrik is Free 
+Software</a>.
 </p>
 </body>
 </html>
