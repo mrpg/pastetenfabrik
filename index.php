@@ -31,6 +31,7 @@ if (isset($_POST['do'])) {
 	}
 	else if ($_POST['do'] == 'del' && isset($_POST['pw'])) {
 		include "pastes.php";
+		include "pref.php";
 
 		if (isset($p[$_POST['id']])) {
 			$u = resolve(sha512($_POST['pw']));
