@@ -38,7 +38,7 @@ if (isset($_POST['do'])) {
 			
 			if ($u == 0 || $u == $p[$_POST['id']][2] || ($public && $u != -1)) {
 				unlink('p/'.$_POST['id'].'.txt.bz2');
-				file_put_contents('pastes.php','unset($p["'.$_POST['id'].'"]); // '.date('r').' - USER'.$u."\n",FILE_APPEND);
+				file_put_contents('pastes.php','unset($p["'.$_POST['id'].'"]); // '.date('r').' - USER'.$u."\n",LOCK_EX | FILE_APPEND);
 				echo '<p><a href="'.$_POST['id'].'.html"><b>'.$_POST['id'].'</b></a> deleted.</p>';
 			}
 		}

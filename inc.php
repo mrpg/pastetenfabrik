@@ -47,7 +47,7 @@ if (!isset($INC_PHP)) {
 	}
 
 	function register($id,$title,$time,$user) {
-		file_put_contents('pastes.php','$p["'.$id.'"] = array("'.base64_encode($title).'",'.$time.',"'.$user.'");'."\n",FILE_APPEND);
+		file_put_contents('pastes.php','$p["'.$id.'"] = array("'.base64_encode($title).'",'.$time.',"'.$user.'");'."\n",LOCK_EX | FILE_APPEND);
 	}
 
 	function dec($str) {
