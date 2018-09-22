@@ -12,12 +12,4 @@ $public = false; // Set this to true to make your pastebin public.
 
 $pgp = ''; // If you have a PGP key, specify its URL here. If not, leave it empty.
 $footer = ''; // If you have a custom footer. If not, leave it empty.
-
-// --------------------
-// |       END        |
-// --------------------
-
-foreach ($pw as $i=>$p) {
-	$pw[$i] = hash('sha512',$pw[$i]);
-}
 ?>

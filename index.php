@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: text/html; charset=ISO-8859-1");
+header("Content-Type: text/html; charset=UTF-8");
 
 include "inc.php";
 ?>
@@ -15,31 +15,40 @@ include "inc.php";
 
 <?php
 if (isset($_POST['do'])) {
+	$u = (!empty($_POST['pw'])) ? array_search($_POST['pw'], $pw) : false;
+
 	if ($_POST['do'] == 'add') {
 		if (!$public) {
-			if (($u = resolve(sha512($_POST['pw']))) != -1) {
-				writep($id = getid(),$_POST['txt']);
-				register($id,$_POST['title'],time(),$u);
-				echo '<p><a href="'.$id.'.html"><b>Your Paste: '.$id.'</b></a></p>';
+			if ($u !== false) {
+				if (writep($id = getid(), $_POST['txt']) && register($id,$_POST['title'], time(), $u)) {
+					echo '<p><a href="'.$id.'.html"><b>Your Paste: '.$id.'</b></a></p>';
+					echo '<p>Raw size: '.strlen($_POST['txt']).' bytes, compressed size: '.filesize('p/'.$id.'.gz').' bytes.</p>';
+				}
+				else {
+					echo '<p>Your paste could not be saved.</p>';
+				}
 			}
 		}
 		else {
-			writep($id = getid(),$_POST['txt']);
-			register($id,$_POST['title'],time(),$_SERVER['REMOTE_ADDR']);
-			echo '<p><a href="'.$id.'.html"><b>Your Paste: '.$id.'</b></a></p>';
+			if (writep($id = getid(), $_POST['txt']) && register($id,$_POST['title'], time(), $_SERVER['REMOTE_ADDR'])) {
+				echo '<p><a href="'.$id.'.html"><b>Your Paste: '.$id.'</b></a></p>';
+			}
+			else {
+				echo '<p>Your paste could not be saved.</p>';
+			}
 		}
 	}
 	else if ($_POST['do'] == 'del' && isset($_POST['pw'])) {
-		include "pastes.php";
 		include "pref.php";
 
-		if (isset($p[$_POST['id']])) {
-			$u = resolve(sha512($_POST['pw']));
-			
-			if ($u == 0 || $u == $p[$_POST['id']][2] || ($public && $u != -1)) {
-				unlink('p/'.$_POST['id'].'.txt.bz2');
-				file_put_contents('pastes.php','unset($p["'.$_POST['id'].'"]); // '.date('r').' - USER'.$u."\n",LOCK_EX | FILE_APPEND);
-				echo '<p><a href="'.$_POST['id'].'.html"><b>'.$_POST['id'].'</b></a> deleted.</p>';
+		if (exists($_POST['id'])) {
+			if ($u === 0 || $u == $meta[2] || ($public && in_array($_POST['pw'], $pw))) {
+				if (unlink('p/'.$_POST['id'].'.gz') && unlink('meta/'.$_POST['id'])) {
+					echo '<p><a href="'.$_POST['id'].'.html"><b>'.$_POST['id'].'</b></a> deleted.</p>';
+				}
+				else {
+					echo '<p>This paste (or its metadata) could not be deleted.</p>';
+				}
 			}
 		}
 	}

@@ -1,17 +1,11 @@
 <?php
-if (!file_exists('p/'.$_GET['id'].'.txt.bz2')) {
+include "inc.php";
+
+if (!isset($_GET['id']) || !exists($_GET['id'])) {
 	header("HTTP/1.0 404 Not Found");
 	echo "404 - Not found";
-	exit;
 }
 else {
-	include "inc.php";
-	include "pastes.php";
-	
-	$id = $_GET['id'];
+	echo getp($_GET['id']);
 }
-
-header("Content-Type: text/plain; charset=ISO-8859-1");
-
-echo getp($id);
 ?>

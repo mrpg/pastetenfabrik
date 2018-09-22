@@ -2,7 +2,7 @@ Pastetenfabrik
 ==============
 
 This is a simple pastebin written in PHP. It is used on a wide variety of web sites, e.g. as my
-own private pastebin: http://paste.mrpg.pw/
+own private pastebin.
 
 It can be operated in multi-user, single-user or public mode.
 
@@ -15,5 +15,4 @@ In non-public mode, only the master may delete pastes. Additionally, the creator
 delete his or her own pastes. In public mode however, those registered users act as *bureaucrats*:
 Every registered user is able to delete every paste.
 
-Paste metadata is stored in pastes.php for the sake of simplicity. This solution is also quite fast -
-even with thousands of pastes - and it is also safe. The actual pastes are stored bzip2-compressed.
+Paste metadata is stored in the directory meta. The actual pastes are stored gzip-compressed.
